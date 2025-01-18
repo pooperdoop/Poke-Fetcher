@@ -1,11 +1,9 @@
-import Header from "./Components/header"
+import Pokeball from "./Components/Pokeball"
 
 function App() {
 
   return (
-    <>
-      <Header/>
-    </>
+      <Pokeball/>
   )
 }
 
