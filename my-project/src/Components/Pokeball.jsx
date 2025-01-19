@@ -31,12 +31,12 @@ export default function Pokeball(){
 
     return(<section className='h-full'> 
 
-                <div className='h-full w-full bg-black absolute -z-10 flex justify-center items-center grid grid-cols-8'>
+                <div className='h-full w-full bg-white absolute -z-10 flex justify-center items-center grid grid-cols-8'>
                     <div className='bg-white col-span-full xl:col-start-2 xl:col-end-8 h-3/4 rounded-lg grid grid-cols-8 grid-rows-4 md:grid-flow-row sm:grid-flow-row'>
                         <div className='bg-red-300 row-span-2 lg:col-span-2 sm:col-span-3 col-span-full infoDiv divBorder'>01</div>
                         <div className='bg-blue-300 row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder'>02</div>
                         <div className='bg-yellow-300 row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder'>03</div>
-                        <div className='bg-green-300 row-span-2 sm:col-span-3 col-span-full grid grid-cols-4 grid-rows-4 m-7 infoDiv4 divBorder'>
+                        <div className='bg-white row-span-2 sm:col-span-3 col-span-full grid grid-cols-4 grid-rows-4 m-7 infoDiv4'>
 
                             <div className="innerInfoDiv divBorder bg-green-100 col-span-2 row-span-2">4.1</div>
                             <div className="innerInfoDiv divBorder bg-green-200 col-span-2 row-span-2">4.2</div>

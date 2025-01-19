@@ -37,6 +37,6 @@ body{
   margin: 10px;
 }
 .divBorder{
-  border: 3px black solid;
+  border: 3px rgb(255, 255, 255) solid;
   box-shadow: 5px 5px 10px;
 }
