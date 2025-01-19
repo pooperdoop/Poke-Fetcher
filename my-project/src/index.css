@@ -9,6 +9,7 @@
 }
 body{
   background-color: gray;
+
 }
 
 #root{
@@ -21,4 +22,21 @@ body{
   font-size: clamp(3rem, -1.5rem + 15vw, 6rem);
     -webkit-text-stroke-width: 4px;
     -webkit-text-stroke-color: rgb(73, 95, 196);
+}
+
+.infoDiv, .innerInfoDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.infoDiv4{
+  border-radius: 10px;
+  margin: 10px;
+}
+.divBorder{
+  border: 3px black solid;
+  box-shadow: 5px 5px 10px;
 }
