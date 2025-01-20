@@ -73,30 +73,30 @@ export default function Pokeball(){
                     <div className=' bg-gray-200 col-span-full xl:col-start-2 xl:col-end-8 h-3/4 rounded-lg grid grid-cols-8 grid-rows-4 md:grid-flow-row sm:grid-flow-row'>
 
                     <AnimatedBlock className='bg-red-300 row-span-2 lg:col-span-2 sm:col-span-3 col-span-full infoDiv divBorder' 
-                        animationConfig={{ from: { transform: 'translateX(-100vw)' }, to: { transform: 'translateX(0)'}}} text="01" />
+                        animationConfig={{ from: { transform: 'translateX(-100vw)' }, to: { transform: 'translateX(0)',  config:{duration:200}}}} text="01" />
 
                     <AnimatedBlock className='bg-blue-300 row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder' 
-                        animationConfig={{ from: { transform: 'translateX(100vw)' }, to: { transform: 'translateX(0)' }}} text="02" />
+                        animationConfig={{ from: { transform: 'translateX(100vw)' }, to: { transform: 'translateX(0)' },  config:{duration:300}}} text="02" />
 
                     <AnimatedBlock className='bg-yellow-300 row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder' 
-                        animationConfig={{ from: {  transform: 'translateX(100vw)' }, to: {  transform: 'translateX(0)' }}} text="03" />
+                        animationConfig={{ from: {  transform: 'translateX(100vw)' }, to: {  transform: 'translateX(0)' },  config:{duration:600}}} text="03" />
 
                     <div className=' bg-gray-200 row-span-2 sm:col-span-3 col-span-full grid grid-cols-4 grid-rows-4 m-7 infoDiv4'>
                         <AnimatedBlock className="innerInfoDiv divBorder bg-green-100 col-span-2 row-span-2" 
-                            animationConfig={{ from: { transform: 'translateX(-100vw)'}, to: { transform: 'translateX(0)'}}} text="4.1" />
+                            animationConfig={{ from: { transform: 'translateX(-100vw)'}, to: { transform: 'translateX(0)'},  config:{duration:600} }} text="4.1" />
 
                         <AnimatedBlock className="innerInfoDiv divBorder bg-green-200 col-span-2 row-span-2" 
-                            animationConfig={{ from: { transform: 'translateX(-100vw)'}, to: { transform: 'translateX(0)'}}} text="4.2" />
+                            animationConfig={{ from: { transform: 'translateX(-100vw)'}, to: { transform: 'translateX(0)'},  config:{duration:500} }} text="4.2" />
 
                         <AnimatedBlock className="innerInfoDiv divBorder bg-green-400 col-span-2 row-span-2" 
-                            animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' }}}text="4.3" />
+                            animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:700}}}text="4.3" />
 
                         <AnimatedBlock className="innerInfoDiv divBorder bg-green-500 col-span-2 row-span-2" 
-                            animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' }}} text="4.4" />
+                            animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:400}}} text="4.4" />
                     </div>
 
                     <AnimatedBlock className='bg-orange-300 row-span-2 sm:col-span-5 col-span-full infoDiv divBorder' 
-                        animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' }}} text="05" /> 
+                        animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:700}}} text="05" /> 
 
                     </div> 
                 </div>)}
