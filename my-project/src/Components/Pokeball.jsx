@@ -23,6 +23,12 @@ export default function Pokeball(){
         leave: {x:0, y:700},
     });
 
+    const transition3 = useTransition(isVisible, {
+        from: {scale:0},
+        enter: {scale:1},
+        leave: {scale:0},
+    });
+
     function handleIsVisible(){
         if(pokemon.trim() !== ""){
             setIsVisible(false);
@@ -31,7 +37,9 @@ export default function Pokeball(){
 
     return(<section className='h-full'> 
 
-                <div className='h-full w-full bg-white absolute -z-10 flex justify-center items-center grid grid-cols-8'>
+    {transition3((style, item) => item ? "":
+
+                <animated.div style={style} className='h-full w-full bg-white absolute -z-10 flex justify-center items-center grid grid-cols-8'>
                     <div className='bg-white col-span-full xl:col-start-2 xl:col-end-8 h-3/4 rounded-lg grid grid-cols-8 grid-rows-4 md:grid-flow-row sm:grid-flow-row'>
                         <div className='bg-red-300 row-span-2 lg:col-span-2 sm:col-span-3 col-span-full infoDiv divBorder'>01</div>
                         <div className='bg-blue-300 row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder'>02</div>
@@ -46,7 +54,8 @@ export default function Pokeball(){
                         </div>
                         <div className='bg-orange-300 row-span-2 sm:col-span-5 col-span-full infoDiv divBorder'>05</div>
                     </div>
-                </div>
+                </animated.div>)}
+
                {transition((style, item) => item ? <animated.header style={style} className="h-2/4 bg-red-500 w-full flex justify-center items-center relative">
 
                     <h1 className='siteTitle absolute top-10 text-yellow-300'>Poké-Fetcher</h1>
