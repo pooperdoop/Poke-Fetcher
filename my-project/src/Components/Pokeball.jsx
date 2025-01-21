@@ -11,6 +11,7 @@ export default function Pokeball(){
     const [pokemonSprite, setPokemonSprite] = useState("");
     const [pokemonID, setPokemonID] = useState("");
     const [pokemonName, setPokemonName] = useState("");
+    const [pokemonFlavorText, setPokemonFlavorText] = useState("");
     const [pokemon, setPokemon] = useState("");
 
     const transition = useTransition(isVisible, {
@@ -54,12 +55,20 @@ export default function Pokeball(){
                     const pokemonSprite = pokemonData.sprites.front_default;
                     const pokemonID = pokemonData.id;
                     const pokemonName = pokemonData.name;
-                    console.log(pokemonData);
                     setPokemonSprite(s => s = pokemonSprite);
                     setPokemonID(I => I = pokemonID);
                     setPokemonName(n => n = pokemonName);
 
+                    //another fetch for the flavor text of the pokemon
+                    fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const pokemonFlavorText = data.flavor_text_entries.find(entry => entry.language.name === 'en').flavor_text;
+                        setPokemonFlavorText(f => f =  pokemonFlavorText)
+                    })
+                    .catch(error => alert('Error fetching data'));
 
+                    console.log(pokemonData);
                     setIsVisible(c => !c);
              }
             } catch(e){
@@ -106,11 +115,13 @@ export default function Pokeball(){
 
                         <AnimatedBlock className='bg-blue-300 row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder' 
                             animationConfig={{ from: { transform: 'translateX(100vw)' }, to: { transform: 'translateX(0)' },  config:{duration:300}}} >
-                                <h1 className='z-10'>#{pokemonID}: {pokemonName}</h1>
+                                <h1 className='z-10 text-center pokemonName'>#{pokemonID}: {pokemonName}</h1>
                             </AnimatedBlock>
 
                         <AnimatedBlock className='bg-yellow-300 row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder' 
-                            animationConfig={{ from: {  transform: 'translateX(100vw)' }, to: {  transform: 'translateX(0)' },  config:{duration:600}}} text="03" />
+                            animationConfig={{ from: {  transform: 'translateX(100vw)' }, to: {  transform: 'translateX(0)' },  config:{duration:600}}}>
+                            <p className='text-center'>{pokemonFlavorText}</p>
+                         </AnimatedBlock>
 
                         <div className=' bg-blue-200  row-span-2 sm:col-span-3 col-span-full grid grid-cols-4 grid-rows-4 m-7 infoDiv4'>
                             <AnimatedBlock className="innerInfoDiv divBorder bg-green-100 col-span-2 row-span-2" 
@@ -127,7 +138,9 @@ export default function Pokeball(){
                         </div>
 
                         <AnimatedBlock className='bg-orange-300 row-span-2 sm:col-span-5 col-span-full infoDiv divBorder' 
-                            animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:700}}} text="05" /> 
+                            animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:700}}} >
+
+                            </AnimatedBlock>
 
                         </div> 
                     </div> )}
