@@ -12,6 +12,7 @@ export default function Pokeball(){
     const [pokemonID, setPokemonID] = useState("");
     const [pokemonName, setPokemonName] = useState("");
     const [pokemonFlavorText, setPokemonFlavorText] = useState("");
+    const [bgColor, setBgColor] = useState("");
     const [pokemonHP, setPokemonHP] = useState("");
     const [pokemonAttack, setPokemonAttack] = useState("");
     const [pokemonDefense, setPokemonDefense] = useState("");
@@ -38,7 +39,7 @@ export default function Pokeball(){
         const props = useSpring(animationConfig);
         
         return (
-          <animated.div className={className} style={props}>
+          <animated.div className={`${className} ${bgColor}`} style={props}>
             {text} {children}
           </animated.div>
         );
@@ -62,7 +63,9 @@ export default function Pokeball(){
                     const pokemonHP = pokemonData.stats[0].base_stat;
                     const pokemonAttack = pokemonData.stats[1].base_stat;
                     const pokemonDef = pokemonData.stats[2].base_stat;
-                    const pokemonSpeed = pokemonData.stats[5].base_stat;
+                    const pokemonSpeed = pokemonData.stats[5].base_stat
+                    const pokemonType = pokemonData.types[0].type.name;
+
                     setPokemonHP(H => H = pokemonHP);
                     setPokemonAttack(a => a = pokemonAttack);
                     setPokemonDefense(d => d = pokemonDef);
@@ -80,7 +83,71 @@ export default function Pokeball(){
                     })
                     .catch(error => alert('Error fetching data'));
 
-                    console.log(pokemonData);
+                    switch(pokemonType){
+                        case "grass":
+                            setBgColor(b => b="bg-green-300")
+                            break;
+                        case "water":
+                            setBgColor(b => b="bg-blue-500")
+                            break;
+                        case "fire":
+                            setBgColor(b => b="bg-red-200")
+                            break;
+                        case "electric":
+                             setBgColor(b => b="bg-yellow-200")
+                            break;
+                        case "ice":
+                            setBgColor(b => b="bg-blue-400")
+                            break;
+                        case "psychic":
+                            setBgColor(b => b="bg-violet-200")
+                        break;
+                        case "fairy":
+                            setBgColor(b => b="bg-pink-200")
+                        break;
+                        case "dragon":
+                            setBgColor(b => b="bg-purple-500")
+                        break;
+                        case "dark":
+                            setBgColor(b => b="bg-gray-500")
+                        break;
+                        case "normal":
+                            setBgColor(b => b="bg-gray-200")
+                        break;
+                        case "fighting":
+                            setBgColor(b => b="bg-orange-200")
+                        break;
+                        case "flying":
+                            setBgColor(b => b="bg-blue-200")
+                        break;
+                        case "poison":
+                            setBgColor(b => b="bg-purple-400")
+                        break;
+                        case "ground":
+                            setBgColor(b => b="bg-brown-200")
+                        break;
+                        case "rock":
+                            setBgColor(b => b="bg-yellow-100")
+                        break;
+                        case "bug":
+                            setBgColor(b => b="bg-lime-300")
+                        break;
+                        case "ghost":
+                            setBgColor(b => b="bg-violet-400")
+                        break;
+                        case "steel":
+                            setBgColor(b => b="bg-sky-300")
+                        break;
+                        case "stellar":
+                            setBgColor(b => b="bg-teal-300")
+                        break;
+                        default:
+                            setBgColor(b => b="bg-white-300")
+                            break;
+                    }
+
+                    console.log(pokemonData.types[0].type.name);
+                    document.body.classList.add(`${bgColor}`);
                     setIsVisible(c => !c);
              }
             } catch(e){
@@ -92,7 +159,7 @@ export default function Pokeball(){
     
     return(<section className='h-full'> 
 
-                <header className='absolute -z-10 bg-blue-400 h-16 w-full '>
+                <header className={`absolute -z-10 ${bgColor} h-16 w-full`}>
 
                 </header>
 
@@ -115,50 +182,51 @@ export default function Pokeball(){
 
                 {transition3((style, item) => item ? "":        
 
-                    <div style={style} className='h-full w-full bg-blue-200 absolute -z-20 flex justify-center items-center grid grid-cols-8 overflow-hidden'>
+                    <div style={style} className={`h-full w-full ${bgColor} absolute -z-20 flex justify-center items-center grid grid-cols-8 overflow-hidden`}>
 
                 
-                        <div className=' bg-blue-200 col-span-full xl:col-start-2 xl:col-end-8 h-3/4 rounded-lg grid grid-cols-8 grid-rows-4 md:grid-flow-row sm:grid-flow-row'>
+                        <div className= {`${bgColor} col-span-full xl:col-start-2 xl:col-end-8 h-3/4 rounded-lg grid grid-cols-8 grid-rows-4 md:grid-flow-row sm:grid-flow-row`}>
 
-                        <AnimatedBlock className='bg-red-300 row-span-2 lg:col-span-2 sm:col-span-3 col-span-full infoDiv divBorder' 
+                        <AnimatedBlock className=' row-span-2 lg:col-span-2 sm:col-span-3 col-span-full infoDiv divBorder' 
                             animationConfig={{ from: { transform: 'translateX(-100vw)' }, to: { transform: 'translateX(0)',  config:{duration:200}}}}>
                                 <img className='w-full h-full pokemonSprite' src={pokemonSprite} />
                                 </AnimatedBlock> 
 
-                        <AnimatedBlock className='bg-blue-300 row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder' 
+                        <AnimatedBlock className=' row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder' 
                             animationConfig={{ from: { transform: 'translateX(100vw)' }, to: { transform: 'translateX(0)' },  config:{duration:300}}} >
                                 <h1 className='z-10 text-center pokemonName'>#{pokemonID}: {pokemonName}</h1>
                             </AnimatedBlock>
 
-                        <AnimatedBlock className='bg-yellow-300 row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder' 
+                        <AnimatedBlock className=' row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder' 
                             animationConfig={{ from: {  transform: 'translateX(100vw)' }, to: {  transform: 'translateX(0)' },  config:{duration:600}}}>
                             <p className='text-center'>{pokemonFlavorText}</p>
                          </AnimatedBlock>
 
 
-                        <div className=' bg-blue-200  row-span-2 sm:col-span-3 col-span-full grid grid-cols-4 grid-rows-4 m-7 infoDiv4'>
-                            <AnimatedBlock className="innerInfoDiv divBorder bg-green-100 col-span-2 row-span-2" 
+                        <div className={` ${bgColor} row-span-2 sm:col-span-3 col-span-full grid grid-cols-4 grid-rows-4 m-7 infoDiv4`} >
+                            
+                            <AnimatedBlock className="innerInfoDiv divBorder  col-span-2 row-span-2" 
                                 animationConfig={{ from: { transform: 'translateX(-100vw)'}, to: { transform: 'translateX(0)'},  config:{duration:600} }} text="Base HP" >
                                     <h1 className='pokemonStats'>{pokemonHP}</h1>
                                 </AnimatedBlock>
 
-                            <AnimatedBlock className="innerInfoDiv divBorder bg-green-200 col-span-2 row-span-2" 
+                            <AnimatedBlock className="innerInfoDiv divBorder  col-span-2 row-span-2" 
                                 animationConfig={{ from: { transform: 'translateX(-100vw)'}, to: { transform: 'translateX(0)'},  config:{duration:500} }} text="Base Attack" >
                                     <h1 className='pokemonStats'>{pokemonAttack}</h1>
                                 </AnimatedBlock>
 
-                            <AnimatedBlock className="innerInfoDiv divBorder bg-green-400 col-span-2 row-span-2" 
+                            <AnimatedBlock className="innerInfoDiv divBorder col-span-2 row-span-2" 
                                 animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:700}}}text="Base Defense">
                                     <h1 className='pokemonStats'>{pokemonDefense}</h1>
                                 </AnimatedBlock>
 
-                            <AnimatedBlock className="innerInfoDiv divBorder bg-green-500 col-span-2 row-span-2" 
+                            <AnimatedBlock className="innerInfoDiv divBorder  col-span-2 row-span-2" 
                                 animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:400}}} text="Base Speed" >
                                     <h1 className='pokemonStats'>{pokemonSpeed}</h1>
                                 </AnimatedBlock>
                         </div>
 
-                        <AnimatedBlock className='bg-orange-300 row-span-2 sm:col-span-5 col-span-full infoDiv divBorder' 
+                        <AnimatedBlock className=' row-span-2 sm:col-span-5 col-span-full infoDiv divBorder' 
                             animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:700}}} >
 
                             </AnimatedBlock>

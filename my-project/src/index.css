@@ -7,11 +7,6 @@
 *{
   font-family: "PKMN RBYGSC Regular";
 }
-body{
-  background-color: #bfdbfe;
-  overflow: hidden;
-
-}
 
 #root{
  height: 100vh;
