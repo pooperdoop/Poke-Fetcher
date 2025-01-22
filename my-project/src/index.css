@@ -33,6 +33,17 @@ body{
   margin: 10px;
 }
 
+.innerInfoDiv{
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.innerInfoDiv > h2{
+  align-items: center;
+}
+
 .infoDiv4{
   border-radius: 10px;
   margin: 10px;
@@ -44,4 +55,8 @@ body{
 
 .pokemonName{
   font-size: clamp(3rem, -1.5rem + 15vw, 3rem);
+}
+
+.pokemonStats{
+  font-size: clamp(1rem, -1rem + 10vw, 2.2rem);
 }

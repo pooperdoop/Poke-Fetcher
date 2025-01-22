@@ -12,6 +12,10 @@ export default function Pokeball(){
     const [pokemonID, setPokemonID] = useState("");
     const [pokemonName, setPokemonName] = useState("");
     const [pokemonFlavorText, setPokemonFlavorText] = useState("");
+    const [pokemonHP, setPokemonHP] = useState("");
+    const [pokemonAttack, setPokemonAttack] = useState("");
+    const [pokemonDefense, setPokemonDefense] = useState("");
+    const [pokemonSpeed, setPokemonSpeed] = useState("");
     const [pokemon, setPokemon] = useState("");
 
     const transition = useTransition(isVisible, {
@@ -55,6 +59,14 @@ export default function Pokeball(){
                     const pokemonSprite = pokemonData.sprites.front_default;
                     const pokemonID = pokemonData.id;
                     const pokemonName = pokemonData.name;
+                    const pokemonHP = pokemonData.stats[0].base_stat;
+                    const pokemonAttack = pokemonData.stats[1].base_stat;
+                    const pokemonDef = pokemonData.stats[2].base_stat;
+                    const pokemonSpeed = pokemonData.stats[5].base_stat;
+                    setPokemonHP(H => H = pokemonHP);
+                    setPokemonAttack(a => a = pokemonAttack);
+                    setPokemonDefense(d => d = pokemonDef);
+                    setPokemonSpeed(s => s = pokemonSpeed);
                     setPokemonSprite(s => s = pokemonSprite);
                     setPokemonID(I => I = pokemonID);
                     setPokemonName(n => n = pokemonName);
@@ -123,18 +135,27 @@ export default function Pokeball(){
                             <p className='text-center'>{pokemonFlavorText}</p>
                          </AnimatedBlock>
 
+
                         <div className=' bg-blue-200  row-span-2 sm:col-span-3 col-span-full grid grid-cols-4 grid-rows-4 m-7 infoDiv4'>
                             <AnimatedBlock className="innerInfoDiv divBorder bg-green-100 col-span-2 row-span-2" 
-                                animationConfig={{ from: { transform: 'translateX(-100vw)'}, to: { transform: 'translateX(0)'},  config:{duration:600} }} text="4.1" />
+                                animationConfig={{ from: { transform: 'translateX(-100vw)'}, to: { transform: 'translateX(0)'},  config:{duration:600} }} text="Base HP" >
+                                    <h1 className='pokemonStats'>{pokemonHP}</h1>
+                                </AnimatedBlock>
 
                             <AnimatedBlock className="innerInfoDiv divBorder bg-green-200 col-span-2 row-span-2" 
-                                animationConfig={{ from: { transform: 'translateX(-100vw)'}, to: { transform: 'translateX(0)'},  config:{duration:500} }} text="4.2" />
+                                animationConfig={{ from: { transform: 'translateX(-100vw)'}, to: { transform: 'translateX(0)'},  config:{duration:500} }} text="Base Attack" >
+                                    <h1 className='pokemonStats'>{pokemonAttack}</h1>
+                                </AnimatedBlock>
 
                             <AnimatedBlock className="innerInfoDiv divBorder bg-green-400 col-span-2 row-span-2" 
-                                animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:700}}}text="4.3" />
+                                animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:700}}}text="Base Defense">
+                                    <h1 className='pokemonStats'>{pokemonDefense}</h1>
+                                </AnimatedBlock>
 
                             <AnimatedBlock className="innerInfoDiv divBorder bg-green-500 col-span-2 row-span-2" 
-                                animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:400}}} text="4.4" />
+                                animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:400}}} text="Base Speed" >
+                                    <h1 className='pokemonStats'>{pokemonSpeed}</h1>
+                                </AnimatedBlock>
                         </div>
 
                         <AnimatedBlock className='bg-orange-300 row-span-2 sm:col-span-5 col-span-full infoDiv divBorder' 
