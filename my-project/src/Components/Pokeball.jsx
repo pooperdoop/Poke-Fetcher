@@ -13,6 +13,7 @@ export default function Pokeball(){
     const [pokemonName, setPokemonName] = useState("");
     const [pokemonFlavorText, setPokemonFlavorText] = useState("");
     const [bgColor, setBgColor] = useState("");
+    const [headerColor, setHeaderColor] = useState("");
     const [pokemonHP, setPokemonHP] = useState("");
     const [pokemonAttack, setPokemonAttack] = useState("");
     const [pokemonDefense, setPokemonDefense] = useState("");
@@ -44,6 +45,15 @@ export default function Pokeball(){
           </animated.div>
         );
       };
+
+          
+    function handleReturn(){
+
+        setIsVisible(c => !c);
+        setPokemon(p => p="");
+        console.log(isVisible); 
+    }
+
 
     async function handleIsVisible(){
         if(pokemon.trim() !== ""){
@@ -86,63 +96,83 @@ export default function Pokeball(){
                     switch(pokemonType){
                         case "grass":
                             setBgColor(b => b="bg-green-300")
+                            setHeaderColor(b => b="bg-green-500")
                             break;
                         case "water":
                             setBgColor(b => b="bg-blue-500")
+                            setHeaderColor(b => b="bg-blue-700")
                             break;
                         case "fire":
-                            setBgColor(b => b="bg-red-200")
+                            setBgColor(b => b="bg-red-500")
+                            setHeaderColor(b => b="bg-red-700")
                             break;
                         case "electric":
                              setBgColor(b => b="bg-yellow-200")
+                             setHeaderColor(b => b="bg-yellow-400")
                             break;
                         case "ice":
                             setBgColor(b => b="bg-blue-400")
+                            setHeaderColor(b => b="bg-blue-600")
                             break;
                         case "psychic":
                             setBgColor(b => b="bg-violet-200")
+                            setHeaderColor(b => b="bg-violet-400")
                         break;
                         case "fairy":
                             setBgColor(b => b="bg-pink-200")
+                            setHeaderColor(b => b="bg-pink-400")
                         break;
                         case "dragon":
                             setBgColor(b => b="bg-purple-500")
+                            setHeaderColor(b => b="bg-purple-700")
                         break;
                         case "dark":
                             setBgColor(b => b="bg-gray-500")
+                            setHeaderColor(b => b="bg-gray-700")
                         break;
                         case "normal":
                             setBgColor(b => b="bg-gray-200")
+                            setHeaderColor(b => b="bg-gray-400")
                         break;
                         case "fighting":
                             setBgColor(b => b="bg-orange-200")
+                            setHeaderColor(b => b="bg-orange-400")
                         break;
                         case "flying":
                             setBgColor(b => b="bg-blue-200")
+                            setHeaderColor(b => b="bg-blue-400")
                         break;
                         case "poison":
                             setBgColor(b => b="bg-purple-400")
+                            setHeaderColor(b => b="bg-purple-600")
                         break;
                         case "ground":
                             setBgColor(b => b="bg-brown-200")
+                            setHeaderColor(b => b="bg-brown-400")
                         break;
                         case "rock":
                             setBgColor(b => b="bg-yellow-100")
+                            setHeaderColor(b => b="bg-yellow-300")
                         break;
                         case "bug":
                             setBgColor(b => b="bg-lime-300")
+                            setHeaderColor(b => b="bg-lime-500")
                         break;
                         case "ghost":
                             setBgColor(b => b="bg-violet-400")
+                            setHeaderColor(b => b="bg-violet-600")
                         break;
                         case "steel":
                             setBgColor(b => b="bg-sky-300")
+                            setHeaderColor(b => b="bg-sky-500")
                         break;
                         case "stellar":
                             setBgColor(b => b="bg-teal-300")
+                            setHeaderColor(b => b="bg-teal-500")
                         break;
                         default:
                             setBgColor(b => b="bg-white-300")
+                            setHeaderColor(b => b="bg-white-500")
                             break;
                     }
 
@@ -156,21 +186,23 @@ export default function Pokeball(){
 
         }
     }
+
+
     
     return(<section className='h-full'> 
 
-                <header className={`absolute -z-10 ${bgColor} h-16 w-full`}>
-
+                <header className={`absolute  ${headerColor} h-16 w-full flex`}>
+                <h1 onClick={handleReturn} className='siteTitleSmall text-yellow-300 ml-3 cursor-pointer'>Poké-Fetcher</h1>
                 </header>
 
                {transition((style, item) => item ? <animated.div style={style} className="h-2/4 bg-red-500 w-full flex justify-center items-center relative">
                     <h1 className='siteTitle absolute top-10 text-yellow-300'>Poké-Fetcher</h1>
-                    <input className='rounded-lg w-1/6 min-w-52 p-3 border-4 border-black mt-10 outline-none' type="text" placeholder='Enter Pokémon Name...' value={pokemon} onChange={() => setPokemon(event.target.value)}/>
+                    <input className='rounded-lg w-1/6 min-w-52 p-3 border-4 border-black mt-10 outline-none' type="text" id="pokemonName" placeholder='Enter Pokémon Name...' value={pokemon} onChange={() => setPokemon(event.target.value)}/>
 
                     <div className="h-1/6 bg-black w-full -bottom-10 absolute flex justify-center items-center">
                         
                         <img className='w-1/6 min-w-52' src={circle} alt="outerCircle" />
-                        <h1 onClick={handleIsVisible} className='absolute z-10 cursor-pointer transition-all hover:text-red-200' id='searchText'>Search</h1>
+                        <button onClick={handleIsVisible} className='absolute z-10 cursor-pointer transition-all hover:text-red-200 border-none' id='searchText'>Search</button>
                         <img onClick={handleIsVisible} className='w-1/12 min-w-32 absolute cursor-pointer' id='innerCircle' src={innerCircle} alt="search" />
                     </div>
                     </animated.div> : '' )}

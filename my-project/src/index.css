@@ -20,6 +20,13 @@
     -webkit-text-stroke-color: rgb(73, 95, 196);
 }
 
+.siteTitleSmall{
+  font-family: 'Pokemon Solid';
+  font-size: clamp(1rem, -1.5rem + 15vw, 2rem);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(73, 95, 196);
+}
+
 .infoDiv, .innerInfoDiv{
   display: flex;
   justify-content: center;
