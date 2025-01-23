@@ -61,6 +61,8 @@ export default function Pokeball(){
                 // searching the API if pokemon exists
                 const fetchedPokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.toLowerCase()}`);
 
+                getEvolutionaryLine(pokemon);
+
                 if(!fetchedPokemon.ok){
                     alert("There is no such Pokemon!");
                     return;
@@ -88,6 +90,8 @@ export default function Pokeball(){
                     fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`)
                     .then(response => response.json())
                     .then(data => {
+                        console.log(data.evolution_chain);
+
                         const pokemonFlavorText = data.flavor_text_entries.find(entry => entry.language.name === 'en').flavor_text;
                         setPokemonFlavorText(f => f =  pokemonFlavorText)
                     })
@@ -176,7 +180,7 @@ export default function Pokeball(){
                             break;
                     }
 
-                    console.log(pokemonData.types[0].type.name);
+                    console.log(pokemonData );
                     document.body.classList.add(`${bgColor}`);
                     setIsVisible(c => !c);
              }
@@ -187,8 +191,36 @@ export default function Pokeball(){
         }
     }
 
-
+    async function getEvolutionaryLine(pokemon) {
+        try {
+            // Step 1: Fetch the Pokémon species data
+            const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`);
+            const speciesData = await speciesResponse.json();
     
+            // Step 2: Get the evolution chain URL
+            const evolutionChainUrl = speciesData.evolution_chain.url;
+    
+            // Step 3: Fetch the evolution chain data
+            const evolutionResponse = await fetch(evolutionChainUrl);
+            const evolutionData = await evolutionResponse.json();
+    
+            // Step 4: Process and display the evolutionary line
+            const evolutionArray = []; // Array to hold the evolutionary line
+            let currentEvolution = evolutionData.chain;
+    
+            // Loop through the evolutionary chain
+            while (currentEvolution) {
+                evolutionArray.push(currentEvolution.species.name); // Add the Pokémon name to the array
+                currentEvolution = currentEvolution.evolves_to[0]; // Move to the next evolution
+            }
+    
+            console.log(`Evolutionary line for ${pokemon}:`, evolutionArray);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+
     return(<section className='h-full'> 
 
                 <header className={`absolute  ${headerColor} h-16 w-full flex`}>
@@ -260,6 +292,7 @@ export default function Pokeball(){
 
                         <AnimatedBlock className=' row-span-2 sm:col-span-5 col-span-full infoDiv divBorder' 
                             animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:700}}} >
+
 
                             </AnimatedBlock>
 
