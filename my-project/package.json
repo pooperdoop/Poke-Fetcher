@@ -2,7 +2,7 @@
   "name": "my-project",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://pooperdoop.github.io/Poke-Fetcher/",
+  "homepage": "https://pooperdoop.github.io/Poke-Fetcher",
   "type": "module",
   "scripts": {
     "dev": "vite",
