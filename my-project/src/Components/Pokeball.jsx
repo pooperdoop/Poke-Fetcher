@@ -19,6 +19,7 @@ export default function Pokeball(){
     const [pokemonDefense, setPokemonDefense] = useState("");
     const [pokemonSpeed, setPokemonSpeed] = useState("");
     const [pokemon, setPokemon] = useState("");
+    const [evolutionaryLine, setEvolutionaryLine] = useState([]);
     const evolutionArray = []; // Array to hold the evolutionary line
 
     const transition = useTransition(isVisible, {
@@ -216,18 +217,26 @@ export default function Pokeball(){
                 const pokemonLineSprite = pokemonLineData.sprites.front_default;// Get Sprite of pokemon
 
                 evolutionArray.push(pokemonLineSprite); // Add the Pokémon Sprite name to the array
-                
                 currentEvolution = currentEvolution.evolves_to[0]; // Move to the next evolution
                 
             }
 
-
             console.log(`Evolutionary line for ${pokemon}:`, evolutionArray);
+
+            const evolutionSprites = evolutionArray.map((src, index) => (
+                <img
+                key = {index}
+                src = {src}
+                className='w-1/3'
+                />
+            ));
+
+            setEvolutionaryLine(e => e = evolutionSprites);
+
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     }
-
 
     return(<section className='h-full'> 
 
@@ -298,10 +307,10 @@ export default function Pokeball(){
                                 </AnimatedBlock>
                         </div>
 
-                        <AnimatedBlock className=' md:row-span-2 row-span-2  sm:col-span-5 col-span-full infoDiv divBorder relative' 
+                        <AnimatedBlock className=' md:row-span-2  sm:col-span-5 col-span-full infoDiv divBorder relative p-10' 
                             animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:700}}} >
                                 <h1 className='top-0 absolute'>Evolution Line</h1>
-
+                                {evolutionaryLine}
 
                             </AnimatedBlock>
 
