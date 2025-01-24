@@ -19,6 +19,7 @@ export default function Pokeball(){
     const [pokemonDefense, setPokemonDefense] = useState("");
     const [pokemonSpeed, setPokemonSpeed] = useState("");
     const [pokemon, setPokemon] = useState("");
+    const evolutionArray = []; // Array to hold the evolutionary line
 
     const transition = useTransition(isVisible, {
         from: {x:0, y:-700},
@@ -51,6 +52,7 @@ export default function Pokeball(){
 
         setIsVisible(c => !c);
         setPokemon(p => p="");
+        
         console.log(isVisible); 
     }
 
@@ -180,7 +182,7 @@ export default function Pokeball(){
                             break;
                     }
 
-                    console.log(pokemonData );
+                    console.log(pokemonData);
                     document.body.classList.add(`${bgColor}`);
                     setIsVisible(c => !c);
              }
@@ -193,27 +195,33 @@ export default function Pokeball(){
 
     async function getEvolutionaryLine(pokemon) {
         try {
-            // Step 1: Fetch the Pokémon species data
             const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}`);
             const speciesData = await speciesResponse.json();
     
-            // Step 2: Get the evolution chain URL
+            // Get the evolution chain URL
             const evolutionChainUrl = speciesData.evolution_chain.url;
     
-            // Step 3: Fetch the evolution chain data
+            // Fetch the evolution chain data
             const evolutionResponse = await fetch(evolutionChainUrl);
             const evolutionData = await evolutionResponse.json();
     
-            // Step 4: Process and display the evolutionary line
-            const evolutionArray = []; // Array to hold the evolutionary line
+            // Process and display the evolutionary line
             let currentEvolution = evolutionData.chain;
     
             // Loop through the evolutionary chain
             while (currentEvolution) {
-                evolutionArray.push(currentEvolution.species.name); // Add the Pokémon name to the array
+
+                const pokemonLine = await fetch((`https://pokeapi.co/api/v2/pokemon/${currentEvolution.species.name}`)) // Get current info of the pokemon
+                const pokemonLineData = await pokemonLine.json(); 
+                const pokemonLineSprite = pokemonLineData.sprites.front_default;// Get Sprite of pokemon
+
+                evolutionArray.push(pokemonLineSprite); // Add the Pokémon Sprite name to the array
+                
                 currentEvolution = currentEvolution.evolves_to[0]; // Move to the next evolution
+                
             }
-    
+
+
             console.log(`Evolutionary line for ${pokemon}:`, evolutionArray);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -246,12 +254,12 @@ export default function Pokeball(){
 
                 {transition3((style, item) => item ? "":        
 
-                    <div style={style} className={`h-full w-full ${bgColor} absolute -z-20 flex justify-center items-center grid grid-cols-8 overflow-hidden`}>
+                    <div style={style} className={`h-full w-full ${bgColor} absolute -z-20 flex sm:items-start md:items-center justify-start grid grid-cols-8 overflow-x-hidden`}>
 
                 
-                        <div className= {`${bgColor} col-span-full xl:col-start-2 xl:col-end-8 h-3/4 rounded-lg grid grid-cols-8 grid-rows-4 md:grid-flow-row sm:grid-flow-row`}>
+                        <div className= {`${bgColor} col-span-full xl:col-start-2 xl:col-end-8 h-3/4 rounded-lg grid grid-cols-8 grid-rows-1 md:grid-rows-4  md:grid-flow-row sm:grid-flow-row md:mt-0 mt-16`}>
 
-                        <AnimatedBlock className=' row-span-2 lg:col-span-2 sm:col-span-3 col-span-full infoDiv divBorder' 
+                        <AnimatedBlock className=' row-span-2 lg:col-span-2 sm:col-span-3 col-span-full infoDiv divBorder ' 
                             animationConfig={{ from: { transform: 'translateX(-100vw)' }, to: { transform: 'translateX(0)',  config:{duration:200}}}}>
                                 <img className='w-full h-full pokemonSprite' src={pokemonSprite} />
                                 </AnimatedBlock> 
@@ -263,7 +271,7 @@ export default function Pokeball(){
 
                         <AnimatedBlock className=' row-span-1 lg:col-span-6 sm:col-span-5 col-span-full infoDiv divBorder' 
                             animationConfig={{ from: {  transform: 'translateX(100vw)' }, to: {  transform: 'translateX(0)' },  config:{duration:600}}}>
-                            <p className='text-center'>{pokemonFlavorText}</p>
+                            <p className='text-center autoSize'>{pokemonFlavorText}</p>
                          </AnimatedBlock>
 
 
@@ -290,8 +298,9 @@ export default function Pokeball(){
                                 </AnimatedBlock>
                         </div>
 
-                        <AnimatedBlock className=' row-span-2 sm:col-span-5 col-span-full infoDiv divBorder' 
+                        <AnimatedBlock className=' md:row-span-2 row-span-2  sm:col-span-5 col-span-full infoDiv divBorder relative' 
                             animationConfig={{ from: { transform: 'translateY(100vh)' }, to: { transform: 'translateY(0)' },  config:{duration:700}}} >
+                                <h1 className='top-0 absolute'>Evolution Line</h1>
 
 
                             </AnimatedBlock>
