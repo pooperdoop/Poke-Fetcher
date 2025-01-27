@@ -263,7 +263,7 @@ export default function Pokeball(){
 
                 {transition3((style, item) => item ? "":        
 
-                    <div style={style} className={`h-full w-full ${bgColor} absolute -z-20 flex sm:items-start md:items-center justify-start grid grid-cols-8 md:overflow-x-hidden sm:overflow-y-auto`}>
+                    <div style={style} className={`h-full w-full ${bgColor} absolute -z-20 flex sm:items-start md:items-center justify-start grid grid-cols-8 overflow-x-hidden sm:overflow-y-auto`}>
 
                 
                         <div className= {`${bgColor} col-span-full xl:col-start-2 xl:col-end-8 h-3/4 rounded-lg grid grid-cols-8 grid-rows-1 md:grid-rows-4  md:grid-flow-row sm:grid-flow-row md:mt-0 mt-16`}>
